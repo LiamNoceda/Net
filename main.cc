@@ -9,7 +9,7 @@ int main() {
     CROW_ROUTE(app, "/string/<string>")
     ([](const std::string& name){
         auto page = crow::mustache::load("index.html");
-        crow::mustache::context ctx = gen(name);
+        crow::mustache::context ctx = generateUserContext(name);
         return page.render(ctx);
     });
 
