@@ -3,17 +3,17 @@
 #include "fn.h"
 
 int main() {
-    crow::SimpleApp app;
+    crow::App<> app;
+    app.loglevel(crow::LogLevel::Warning);
 
-    CROW_ROUTE(app, "/<string>")([](std::string name){
+    CROW_ROUTE(app, "/string/<string>")
+    ([](const std::string& name){
         auto page = crow::mustache::load("index.html");
-        crow::mustache::context ctx = generateUserContext(name);
+        crow::mustache::context ctx = gen(name);
         return page.render(ctx);
     });
 
-    app.port(18080)
-        .multithreaded()
-        .run();
-
-    return 0;
+    app.port(18080);
+    app.multithreaded();
+    app.run();
 }
