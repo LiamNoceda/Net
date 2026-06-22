@@ -6,7 +6,7 @@ int main() {
     crow::App<> app;
     app.loglevel(crow::LogLevel::Warning);
 
-    CROW_ROUTE(app, "/string/<string>")
+    CROW_ROUTE(app, "/string")
     ([](const std::string& name){
         auto page = crow::mustache::load("index.html");
         crow::mustache::context ctx = generateUserContext(name);
